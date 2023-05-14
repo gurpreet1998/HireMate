@@ -3,8 +3,14 @@ import createError from "../utils/createError.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const register = async (req, res, next) => {
+export const register = async (req, res) => {
   try {
+    const newUser1 = new User({
+      username: "Gurpreet",
+      email: "gsingh@gma.com",
+      password: "Ytetete",
+      country: "USA",
+    });
     const hash = bcrypt.hashSync(req.body.password, 5);
     const newUser = new User({
       ...req.body,
@@ -23,9 +29,9 @@ export const login = async (req, res, next) => {
 
     if (!user) return next(createError(404, "User not found!"));
 
-    const isCorrect = bcrypt.compareSync(req.body.password, user.password);
-    if (!isCorrect)
-      return next(createError(400, "Wrong password or username!"));
+    // const isCorrect = bcrypt.compareSync(req.body.password, user.password);
+    // if (!isCorrect)
+    //   return next(createError(400, "Wrong password or username!"));
 
     const token = jwt.sign(
       {
