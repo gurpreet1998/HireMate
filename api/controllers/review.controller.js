@@ -18,6 +18,7 @@ export const createReview = async (req, res, next) => {
       gigId: req.body.gigId,
       userId: req.userId,
     });
+    console.log(review);
 
     if (review)
       return next(
@@ -25,6 +26,14 @@ export const createReview = async (req, res, next) => {
       );
 
     //TODO: check if the user purchased the gig.
+
+    // const count = await Review.countDocuments({
+    //   userId: req.userId,
+    //   gigId: req.body.gigId,
+    // });
+
+    // if (count == 0)
+    //   return next(createError(403, "You are not allowed to add review!"));
 
     const savedReview = await newReview.save();
 
