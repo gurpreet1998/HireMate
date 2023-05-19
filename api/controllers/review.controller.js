@@ -56,6 +56,13 @@ export const getReviews = async (req, res, next) => {
 };
 export const deleteReview = async (req, res, next) => {
   try {
+    const review = await Review.findById(req.params.id);
+    console.log(review);
+    if (review.userId != req.userId)
+      return next(createError(403, "You can delete only your own Review!"));
+
+    await Review.findByIdAndDelete(req.params.id);
+    res.status(200).send("Review has been deleted!");
   } catch (err) {
     next(err);
   }

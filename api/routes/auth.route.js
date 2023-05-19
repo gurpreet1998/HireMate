@@ -6,7 +6,7 @@ const router = express.Router();
 /**
  * @swagger
  * tags:
- *   name: Signin-Signup Name
+ *   name: User Signin-Signup
  *   description: APIs for user signin and signup functionality
  */
 
@@ -14,7 +14,7 @@ const router = express.Router();
  * @swagger
  * /api/auth/register/:
  *   post:
- *     tags: [Signin-Signup Name]
+ *     tags: [User Signin-Signup]
  *     summary: User registration
  *     description: Register a new user.
  *     requestBody:
@@ -47,7 +47,7 @@ router.post("/register", register);
  * @swagger
  * /api/auth/login/:
  *   post:
- *     tags: [Signin-Signup Name]
+ *     tags: [User Signin-Signup]
  *     summary: User Login
  *     description: Login existing User
  *     requestBody:
@@ -75,21 +75,30 @@ router.post("/register", register);
  */
 router.post("/login", login);
 
-// /**
-//  * @swagger
-//  * /api/logout:
-//  *   post:
-//  *     summary: User logout
-//  *     tags: [Signin-Signup Name]
-//  *     description: Log out a user.
-//  *     responses:
-//  *       200:
-//  *         description: User logged out successfully
-//  *       401:
-//  *         description: Unauthorized
-//  *       500:
-//  *         description: Internal server error
-//  */
+/**
+ * @swagger
+ * /api/auth/logout/:
+ *   post:
+ *     tags: [User Signin-Signup]
+ *     summary: User Logout
+ *     description: Logout User
+ *     responses:
+ *       200:
+ *         description: User registered successfully
+ *
+ *       400:
+ *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
 router.post("/logout", logout);
 
 export default router;
