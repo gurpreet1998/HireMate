@@ -18,7 +18,6 @@ export const createReview = async (req, res, next) => {
       gigId: req.body.gigId,
       userId: req.userId,
     });
-    console.log(review);
 
     if (review)
       return next(
@@ -56,14 +55,17 @@ export const getReviews = async (req, res, next) => {
 };
 export const deleteReview = async (req, res, next) => {
   try {
-    const review = await Review.findById(req.params.id);
-    console.log(review);
-    if (review.userId != req.userId)
-      return next(createError(403, "You can delete only your own Review!"));
-
-    await Review.findByIdAndDelete(req.params.id);
-    res.status(200).send("Review has been deleted!");
-  } catch (err) {
-    next(err);
+    const review = await Review.findById(req.params.id); // Use findById instead of find
+    if (!review) {
+      return res.status(404).send("Review not found."); // Handle if review is not found
+    }
+    console.log(req);
+    if (req.userId !== review.userId.toString()) {
+      return res.status(403).send("You can delete only your review!"); // Return response instead of calling next
+    }
+    await Review.findByIdAndDelete(req.params.id); // Use req.params._id instead of req.body._id
+    res.status(200).send("Review deleted.");
+  } catch (error) {
+    next(error); // Pass the error to the error handler middleware
   }
 };
