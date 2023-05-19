@@ -3,14 +3,15 @@ import createError from "../utils/createError.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
   try {
-    const newUser1 = new User({
-      username: "Gurpreet",
-      email: "gsingh@gma.com",
-      password: "Ytetete",
-      country: "USA",
-    });
+    // const newUser1 = new User({
+    //   username: "Gurpreet",
+    //   email: "gsingh@gma.com",
+    //   password: "Ytetete",
+    //   country: "USA",
+    // });
+    console.log(req.body);
     const hash = bcrypt.hashSync(req.body.password, 5);
     const newUser = new User({
       ...req.body,
