@@ -10,10 +10,89 @@ import reviewRoute from "./routes/review.route.js";
 import authRoute from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import swaggerJSDoc from "swagger-jsdoc";
+import SwaggerUI from "swagger-ui-express";
 
 const app = express();
 dotenv.config();
 mongoose.set("strictQuery", true);
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "HireMate API Documentation",
+      version: "1.0.0",
+    },
+    servers: [
+      {
+        url: "http://localhost:8800/",
+      },
+    ],
+    components: {
+      schemas: {
+        UserRegistration: {
+          type: "object",
+          properties: {
+            username: {
+              type: "string",
+            },
+            password: {
+              type: "string",
+            },
+            email: {
+              type: "string",
+            },
+            country: {
+              type: "string",
+            },
+          },
+          example: {
+            username: "example_user",
+            password: "admin",
+            email: "example@example.com",
+            country: "USA",
+          },
+        },
+        UserLogin: {
+          type: "object",
+          properties: {
+            username: {
+              type: "string",
+            },
+            password: {
+              type: "string",
+            },
+          },
+          example: {
+            username: "example_user",
+            password: "admin",
+          },
+        },
+
+        Error: {
+          type: "object",
+          properties: {
+            code: {
+              type: "integer",
+            },
+            message: {
+              type: "string",
+            },
+          },
+          example: {
+            code: 400,
+            message: "Bad request",
+          },
+        },
+      },
+    },
+  },
+  apis: ["./routes/*js"],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+app.use("/api-docs", SwaggerUI.serve, SwaggerUI.setup(swaggerSpec));
 
 const connect = async () => {
   try {
@@ -24,7 +103,6 @@ const connect = async () => {
   }
 };
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
