@@ -3,7 +3,9 @@ import Conversation from "../models/conversation.model.js";
 
 export const createConversation = async (req, res, next) => {
   const newConversation = new Conversation({
-    id: req.isSeller ? req.userId + req.body.to : req.body.to + req.userId,
+    id: req.isSeller
+      ? req.userId + req.body.to + req.body.gigId
+      : req.body.to + req.userId + req.body.gigId,
     sellerId: req.isSeller ? req.userId : req.body.to,
     buyerId: req.isSeller ? req.body.to : req.userId,
     readBySeller: req.isSeller,
