@@ -56,7 +56,7 @@ export const getOrders = async (req, res, next) => {
   try {
     const orders = await Order.find({
       ...(req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }),
-      isCompleted: true,
+      // isCompleted: true,
     });
 
     res.status(200).send(orders);
@@ -78,6 +78,21 @@ export const confirm = async (req, res, next) => {
     );
 
     res.status(200).send("Order has been confirmed.");
+  } catch (err) {
+    next(err);
+  }
+};
+export const updateOrderStatus = async (req, res, next) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  try {
+    const updatedOrder = await Order.findByIdAndUpdate(
+      id,
+      { isCompleted: status },
+      { new: true }
+    );
+
+    res.status(200).send(updatedOrder);
   } catch (err) {
     next(err);
   }
