@@ -7,7 +7,45 @@ import { verifyToken } from "../middleware/jwt.js";
 
 const router = express.Router();
 
-router.post("/", verifyToken, createMessage);
+/**
+ * @swagger
+ * tags:
+ *   name: Messages
+ *   description: APIs for Message service
+ */
+
+/**
+ * @swagger
+ * /api/messages/createMessage/:
+ *   post:
+ *     tags: [Messages]
+ *     summary: Create Nessage
+ *     description: Create Nessage
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Message'
+ *     responses:
+ *       200:
+ *         description: Message Send Successfully
+ *
+ */
+
+router.post("/", verifyToken, getMessages);
+
+/**
+ * @swagger
+ * /api/messages/getMessages/:
+ *   get:
+ *     tags: [Messages]
+ *     summary: Get Nessages
+ *     description: Get Nessages
+ *     requestBody:
+ *      required: true
+ *
+ */
 router.get("/:id", verifyToken, getMessages);
 
 export default router;
