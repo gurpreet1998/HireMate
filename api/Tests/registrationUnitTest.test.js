@@ -1,9 +1,6 @@
 import { register } from "../controllers/auth.controller";
 import bcrypt from "bcrypt";
 import User from "../models/user.model";
-import { login } from "../controllers/auth.controller";
-import createError from "../utils/createError";
-import jwt from "jsonwebtoken";
 
 jest.mock("../models/user.model"); // Mock the User model
 
@@ -65,7 +62,4 @@ describe("User Registration", () => {
     expect(next).toHaveBeenCalledTimes(1);
     expect(next).toHaveBeenCalledWith(expect.any(Error));
   });
-
-  // Additional test cases...
-  //login Functionality Unit Test cases:
 });
