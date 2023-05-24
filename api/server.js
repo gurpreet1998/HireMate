@@ -154,7 +154,75 @@ const options = {
             password: "admin",
           },
         },
-
+        Order: {
+          type: "object",
+          properties: {
+            gigId: {
+              type: "string",
+              required: true,
+            },
+            img: {
+              type: "string",
+              required: false,
+            },
+            title: {
+              type: "string",
+              required: true,
+            },
+            price: {
+              type: "number",
+              required: true,
+            },
+            sellerId: {
+              type: "string",
+              required: true,
+            },
+            buyerId: {
+              type: "string",
+              required: true,
+            },
+            isCompleted: {
+              type: "boolean",
+              default: false,
+            },
+            payment_intent: {
+              type: "string",
+              required: true,
+            },
+          },
+          example: {
+            gigId: "example_gig_id",
+            img: "example_image_url",
+            title: "Example Order",
+            price: 50,
+            sellerId: "example_seller_id",
+            buyerId: "example_buyer_id",
+            isCompleted: false,
+            payment_intent: "example_payment_intent",
+          },
+        },
+        Message: {
+          type: "object",
+          properties: {
+            conversationId: {
+              type: "string",
+              required: true,
+            },
+            userId: {
+              type: "string",
+              required: true,
+            },
+            desc: {
+              type: "string",
+              required: true,
+            },
+          },
+          example: {
+            conversationId: "example_conversation_id",
+            userId: "example_user_id",
+            desc: "Example message description",
+          },
+        },
         Error: {
           type: "object",
           properties: {
