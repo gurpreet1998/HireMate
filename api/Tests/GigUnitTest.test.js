@@ -178,3 +178,72 @@ describe("deleteGig", () => {
     expect(next).toHaveBeenCalledWith(error);
   });
 });
+describe("deleteGig", () => {
+  test("should delete the gig when request is from the gig owner", async () => {
+    const gigId = "gig123";
+    const userId = "user123";
+
+    const req = {
+      params: { id: gigId },
+      userId: userId,
+    };
+
+    const gig = {
+      _id: gigId,
+      userId: userId,
+    };
+
+    Gig.findById = jest.fn().mockResolvedValue(gig);
+    Gig.findByIdAndDelete = jest.fn().mockResolvedValue();
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+
+    const next = jest.fn();
+
+    await deleteGig(req, res, next);
+
+    expect(Gig.findById).toHaveBeenCalledWith(gigId);
+    expect(Gig.findByIdAndDelete).toHaveBeenCalledWith(gigId);
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.send).toHaveBeenCalledWith("Gig has been deleted!");
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  test("should handle errors and pass them to the next middleware", async () => {
+    const gigId = "gig123";
+    const userId = "user123";
+
+    const req = {
+      params: { id: gigId },
+      userId: userId,
+    };
+
+    const gig = {
+      _id: gigId,
+      userId: userId,
+    };
+
+    const error = new Error("Some error");
+
+    Gig.findById = jest.fn().mockResolvedValue(gig);
+    Gig.findByIdAndDelete = jest.fn().mockRejectedValue(error);
+
+    const res = {
+      status: jest.fn(),
+      send: jest.fn(),
+    };
+
+    const next = jest.fn();
+
+    await deleteGig(req, res, next);
+
+    expect(Gig.findById).toHaveBeenCalledWith(gigId);
+    expect(Gig.findByIdAndDelete).toHaveBeenCalledWith(gigId);
+    expect(res.status).not.toHaveBeenCalled();
+    expect(res.send).not.toHaveBeenCalled();
+    expect(next).toHaveBeenCalledWith(error);
+  });
+});

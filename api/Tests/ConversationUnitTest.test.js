@@ -195,3 +195,30 @@ describe("getSingleConversation", () => {
     expect(next).not.toHaveBeenCalled();
   });
 });
+describe("getSingleConversation", () => {
+  it("should return the single conversation if it exists", async () => {
+    const req = {
+      params: {
+        id: "testConversationId",
+      },
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+    const next = jest.fn();
+
+    const conversation = {
+      // Define the conversation object
+    };
+
+    Conversation.findOne.mockResolvedValue(conversation);
+
+    await getSingleConversation(req, res, next);
+
+    expect(Conversation.findOne).toHaveBeenCalledWith({ id: req.params.id });
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.send).toHaveBeenCalledWith(conversation);
+    expect(next).not.toHaveBeenCalled();
+  });
+});
