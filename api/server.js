@@ -24,11 +24,11 @@ const options = {
       title: "HireMate API Documentation",
       version: "1.0.0",
     },
-    servers: [
-      {
-        // url: "http://localhost:8800/",
-      },
-    ],
+    // servers: [
+    //   {
+    //     // url: "http://localhost:8800/",
+    //   },
+    // ],
     components: {
       schemas: {
         reviewModel: {
