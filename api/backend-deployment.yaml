@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: gurpreets1/hirematebackend:1.0.3
+          image: gurpreets1/hirematebackend:1.0.4
           ports:
             - containerPort: 8800
 
