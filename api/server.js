@@ -16,8 +16,9 @@ import SwaggerUI from "swagger-ui-express";
 const app = express();
 dotenv.config();
 mongoose.set("strictQuery", true);
-app.use(cors({ origin: "http://localhost:8082", credentials: true }));
-app.use(cors({ origin: "http://20.246.175.59/", credentials: true }));
+//app.use(cors({ origin: "http://localhost:8082", credentials: true }));
+//app.use(cors({ origin: "http://20.246.175.59:80", credentials: true }));
+//app.use(cors({ origin: "*", credentials: true }));
 const options = {
   definition: {
     openapi: "3.0.0",
