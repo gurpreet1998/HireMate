@@ -46,6 +46,8 @@ export const login = async (req, res, next) => {
     res
       .cookie("accessToken", token, {
         httpOnly: true,
+        sameSite: "None", // Set SameSite attribute to None
+        secure: true, // Set Secure attribute to true
       })
       .status(200)
       .send(info);
