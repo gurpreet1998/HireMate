@@ -17,17 +17,8 @@ const app = express();
 dotenv.config();
 mongoose.set("strictQuery", true);
 //app.use(cors({ origin: "http://localhost:8082", credentials: true }));
-//app.use(cors({ origin: "http://20.246.175.59:80", credentials: true }));
-//app.use(cors({ origin: "*", credentials: true }));
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+app.use(cors({ origin: "http://20.246.175.59", credentials: true }));
+app.set("trust proxy", true);
 const options = {
   definition: {
     openapi: "3.0.0",
