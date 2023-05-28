@@ -11,6 +11,6 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 # Expose the port your application listens on (replace <port> with the actual port number)
-EXPOSE 8080
+EXPOSE 8800
 # Specify the command to run your application
 CMD ["yarn", "start"]

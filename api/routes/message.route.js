@@ -33,7 +33,7 @@ const router = express.Router();
  *
  */
 
-router.post("/", verifyToken, getMessages);
+router.post("/", verifyToken, createMessage);
 
 /**
  * @swagger

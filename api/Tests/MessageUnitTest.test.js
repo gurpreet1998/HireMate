@@ -83,3 +83,90 @@ describe("getMessages", () => {
     expect(next).not.toHaveBeenCalled();
   });
 });
+describe("getMessages", () => {
+  it("should return messages for a conversation", async () => {
+    const req = {
+      params: {
+        id: "testConversationId",
+      },
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+    const next = jest.fn();
+
+    const messages = [
+      // Define the messages array
+    ];
+
+    Message.find.mockResolvedValue(messages);
+
+    await getMessages(req, res, next);
+
+    expect(Message.find).toHaveBeenCalledWith({
+      conversationId: req.params.id,
+    });
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.send).toHaveBeenCalledWith(messages);
+    expect(next).not.toHaveBeenCalled();
+  });
+});
+describe("getMessages", () => {
+  it("should return messages for a conversation", async () => {
+    const req = {
+      params: {
+        id: "testConversationId",
+      },
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+    const next = jest.fn();
+
+    const messages = [
+      // Define the messages array
+    ];
+
+    Message.find.mockResolvedValue(messages);
+
+    await getMessages(req, res, next);
+
+    expect(Message.find).toHaveBeenCalledWith({
+      conversationId: req.params.id,
+    });
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.send).toHaveBeenCalledWith(messages);
+    expect(next).not.toHaveBeenCalled();
+  });
+});
+describe("getMessages", () => {
+  it("should return messages for a conversation", async () => {
+    const req = {
+      params: {
+        id: "testConversationId",
+      },
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      send: jest.fn(),
+    };
+    const next = jest.fn();
+
+    const messages = [
+      // Define the messages array
+    ];
+
+    Message.find.mockResolvedValue(messages);
+
+    await getMessages(req, res, next);
+
+    expect(Message.find).toHaveBeenCalledWith({
+      conversationId: req.params.id,
+    });
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.send).toHaveBeenCalledWith(messages);
+    expect(next).not.toHaveBeenCalled();
+  });
+});
