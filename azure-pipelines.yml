@@ -1,0 +1,68 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  imageName: 'gurpreets1/hirematebackend:2.0.1'
+  #dockerRegistryServiceConnection: 'your-docker-registry-connection'
+
+stages:
+- stage: Test
+  displayName: 'Run Test Suite'
+  jobs:
+  - job: TestJob
+    displayName: 'Run Tests'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '14.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        npm ci
+        npm test --runInBand --testMatch "./Tests"
+      displayName: 'Run Test Suite'
+
+# - stage: BuildAndPush
+#   displayName: 'Build and Push Docker Image'
+#   dependsOn: Test
+#   jobs:
+#   - job: BuildJob
+#     displayName: 'Build and Push'
+#     steps:
+#     - task: Docker@2
+#       displayName: 'Build and Push Docker Image'
+#       inputs:
+#         command: 'buildAndPush'
+#         containerRegistry: '$(dockerRegistryServiceConnection)'
+#         repository: '$(imageName)'
+#         Dockerfile: '**/Dockerfile'
+#         tags: |
+#           $(Build.BuildId)
+#           latest
+
+# - stage: CodeCoverage
+  displayName: 'Code Coverage'
+  dependsOn: BuildAndPush
+  jobs:
+  - job: CodeCoverageJob
+    displayName: 'Generate Code Coverage Report'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '14.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        npm ci
+        npm run test -- --coverage
+      displayName: 'Run Jest Test Cases with Coverage'
+
+    - task: PublishCodeCoverageResults@1
+      displayName: 'Publish Code Coverage Results'
+      inputs:
+        codeCoverageTool: 'Cobertura'
+        summaryFileLocation: '**/coverage/cobertura-coverage.xml'
+        reportDirectory: '**/coverage'
