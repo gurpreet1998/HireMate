@@ -13,7 +13,6 @@ steps:
   - script: |
       cd api
       npm install
-      npm run build
       npm test
     displayName: "npm install and build"
   - task: PublishTestResults@2
