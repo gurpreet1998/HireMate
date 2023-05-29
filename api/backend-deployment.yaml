@@ -18,7 +18,7 @@ spec:
           ports:
             - containerPort: 8800
 ---
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: backend-autoscaler
