@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="31" failures="0" errors="0" time="4.502">
+  <testsuite name="login" errors="0" failures="0" skipped="0" timestamp="2023-05-29T03:14:30" time="2.573" tests="2">
+    <testcase classname="login should handle errors" name="login should handle errors" time="0.007">
+    </testcase>
+    <testcase classname="login should fail to log in with incorrect credentials" name="login should fail to log in with incorrect credentials" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="createGig" errors="0" failures="0" skipped="0" timestamp="2023-05-29T03:14:30" time="2.567" tests="6">
+    <testcase classname="createGig should create a gig successfully when request is from a seller" name="createGig should create a gig successfully when request is from a seller" time="0.005">
+    </testcase>
+    <testcase classname="createGig should handle errors and pass them to the next middleware" name="createGig should handle errors and pass them to the next middleware" time="0.002">
+    </testcase>
+    <testcase classname="deleteGig should delete the gig when request is from the gig owner" name="deleteGig should delete the gig when request is from the gig owner" time="0.002">
+    </testcase>
+    <testcase classname="deleteGig should handle errors and pass them to the next middleware" name="deleteGig should handle errors and pass them to the next middleware" time="0.005">
+    </testcase>
+    <testcase classname="deleteGig should delete the gig when request is from the gig owner" name="deleteGig should delete the gig when request is from the gig owner" time="0.002">
+    </testcase>
+    <testcase classname="deleteGig should handle errors and pass them to the next middleware" name="deleteGig should handle errors and pass them to the next middleware" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Review API" errors="0" failures="0" skipped="0" timestamp="2023-05-29T03:14:30" time="3.425" tests="3">
+    <testcase classname="Review API should not allow sellers to create a review" name="Review API should not allow sellers to create a review" time="0.009">
+    </testcase>
+    <testcase classname="Review API should prevent creating a duplicate review" name="Review API should prevent creating a duplicate review" time="0.009">
+    </testcase>
+    <testcase classname="Review API should prevent user from creating a duplicate review for a gig" name="Review API should prevent user from creating a duplicate review for a gig" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="User Registration" errors="0" failures="0" skipped="0" timestamp="2023-05-29T03:14:30" time="3.649" tests="4">
+    <testcase classname="User Registration registers a new user" name="User Registration registers a new user" time="0.015">
+    </testcase>
+    <testcase classname="User Registration handles errors during user registration" name="User Registration handles errors during user registration" time="0.002">
+    </testcase>
+    <testcase classname="User Registration registers a new user" name="User Registration registers a new user" time="0.002">
+    </testcase>
+    <testcase classname="User Registration handles errors during user registration" name="User Registration handles errors during user registration" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="createMessage" errors="0" failures="0" skipped="0" timestamp="2023-05-29T03:14:30" time="3.771" tests="5">
+    <testcase classname="createMessage should create a message successfully" name="createMessage should create a message successfully" time="0.008">
+    </testcase>
+    <testcase classname="getMessages should return messages for a conversation" name="getMessages should return messages for a conversation" time="0.002">
+    </testcase>
+    <testcase classname="getMessages should return messages for a conversation" name="getMessages should return messages for a conversation" time="0.001">
+    </testcase>
+    <testcase classname="getMessages should return messages for a conversation" name="getMessages should return messages for a conversation" time="0.001">
+    </testcase>
+    <testcase classname="getMessages should return messages for a conversation" name="getMessages should return messages for a conversation" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="User Login" errors="0" failures="0" skipped="0" timestamp="2023-05-29T03:14:30" time="3.746" tests="2">
+    <testcase classname="User Login logs in a user" name="User Login logs in a user" time="0.006">
+    </testcase>
+    <testcase classname="User Login fails to log in a user with incorrect credentials" name="User Login fails to log in a user with incorrect credentials" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="createConversation" errors="0" failures="0" skipped="0" timestamp="2023-05-29T03:14:30" time="3.773" tests="7">
+    <testcase classname="createConversation should create a conversation successfully" name="createConversation should create a conversation successfully" time="0.006">
+    </testcase>
+    <testcase classname="createConversation should handle errors during conversation creation" name="createConversation should handle errors during conversation creation" time="0.001">
+    </testcase>
+    <testcase classname="createConversation should create a conversation successfully" name="createConversation should create a conversation successfully" time="0.001">
+    </testcase>
+    <testcase classname="updateConversation should update conversation with readBySeller=true if user is a seller" name="updateConversation should update conversation with readBySeller=true if user is a seller" time="0.002">
+    </testcase>
+    <testcase classname="updateConversation should update conversation with readByBuyer=true if user is not a seller" name="updateConversation should update conversation with readByBuyer=true if user is not a seller" time="0.001">
+    </testcase>
+    <testcase classname="getSingleConversation should return the single conversation if it exists" name="getSingleConversation should return the single conversation if it exists" time="0.001">
+    </testcase>
+    <testcase classname="getSingleConversation should return the single conversation if it exists" name="getSingleConversation should return the single conversation if it exists" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Order API" errors="0" failures="0" skipped="0" timestamp="2023-05-29T03:14:30" time="3.947" tests="2">
+    <testcase classname="Order API GET /orders should get orders for a user" name="Order API GET /orders should get orders for a user" time="0.002">
+    </testcase>
+    <testcase classname="Order API GET /orders should get orders for a user" name="Order API GET /orders should get orders for a user" time="0.001">
+    </testcase>
+  </testsuite>
+</testsuites>
