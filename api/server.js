@@ -16,8 +16,14 @@ import SwaggerUI from "swagger-ui-express";
 const app = express();
 dotenv.config();
 mongoose.set("strictQuery", true);
-//app.use(cors({ origin: "http://localhost:8082", credentials: true }));
+app.use(cors({ origin: "http://localhost:8082", credentials: true }));
 app.use(cors({ origin: "http://20.246.175.59", credentials: true }));
+app.use(
+  cors({
+    origin: true, // Allow requests from any origin
+    credentials: true, // Enable credentials (cookies)
+  })
+);
 app.set("trust proxy", true);
 const options = {
   definition: {
@@ -26,11 +32,11 @@ const options = {
       title: "HireMate API Documentation",
       version: "1.0.0",
     },
-    // servers: [
-    //   {
-    //     // url: "http://localhost:8800/",
-    //   },
-    // ],
+    servers: [
+      {
+        url: "http://localhost:8800/",
+      },
+    ],
     components: {
       schemas: {
         reviewModel: {
@@ -244,6 +250,18 @@ const options = {
     },
   },
   apis: ["./routes/*js"],
+  explorer: true,
+  swaggerOptions: {
+    plugins: [
+      {
+        cors: {
+          // Set CORS options
+          origins: ["http://localhost:8800", "http://20.127.253.108"], // Update with your Swagger UI URL
+          credentials: true, // Enable credentials (cookies)
+        },
+      },
+    ],
+  },
 };
 
 const swaggerSpec = swaggerJSDoc(options);
