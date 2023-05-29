@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "jest": "^29.5.0",
+    "jest-junit": "^16.0.0",
     "jest-sonar-reporter": "^2.0.0",
     "nyc": "^15.1.0",
     "supertest": "^6.3.3"
@@ -57,6 +58,16 @@
     "testEnvironment": "node",
     "transformIgnorePatterns": [
       "/node_modules/(?!(module-to-transpile)/)"
+    ],
+    "reporters": [
+      "default",
+      [
+        "jest-junit",
+        {
+          "outputDirectory": "test-results",
+          "outputName": "TEST-RESULTS.xml"
+        }
+      ]
     ]
   }
 }
