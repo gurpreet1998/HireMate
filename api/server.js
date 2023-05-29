@@ -18,6 +18,7 @@ dotenv.config();
 mongoose.set("strictQuery", true);
 app.use(cors({ origin: "http://localhost:8082", credentials: true }));
 app.use(cors({ origin: "http://20.246.175.59", credentials: true }));
+app.use(cors({ origin: "http://20.127.253.108", credentials: true }));
 app.use(
   cors({
     origin: true, // Allow requests from any origin
@@ -32,11 +33,11 @@ const options = {
       title: "HireMate API Documentation",
       version: "1.0.0",
     },
-    servers: [
-      {
-        url: "http://localhost:8800/",
-      },
-    ],
+    // servers: [
+    //   {
+    //     url: "http://localhost:8800/",
+    //   },
+    // ],
     components: {
       schemas: {
         reviewModel: {
