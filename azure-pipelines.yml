@@ -26,8 +26,9 @@ stages:
         npm install --global jest
         echo "export NODE_OPTIONS=--experimental-vm-modules" >> $BASH_ENV
         source $BASH_ENV
-        jest ./Tests/LoginUnitTest2.test.js
+        jest ./Tests/LoginUnitTest2.test.js --config=jest.config.js
       displayName: 'Run Test Suite'
+
 
 
 
