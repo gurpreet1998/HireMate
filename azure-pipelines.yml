@@ -1,96 +1,22 @@
 trigger:
 - master
-pr: none
 
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  imageName: 'gurpreets1/hirematebackend:2.0.1'
-  #dockerRegistryServiceConnection: 'your-docker-registry-connection'
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
 
-stages:
-- stage: Test
-  displayName: 'Run Test Suite'
-  jobs:
-  - job: TestJob
-    displayName: 'Run Tests'
-    steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '14.x'
-      displayName: 'Install Node.js'
+- script:  
+    npm install
+    npm test
+  displayName: 'npm install and build'
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml'
+  
 
-    - script: |
-        cd api
-        npm ci
-        npm install --global jest
-        echo "export NODE_OPTIONS=--experimental-vm-modules" >> $BASH_ENV
-        source $BASH_ENV
-        jest ./Tests/LoginUnitTest2.test.js --config=package.json
-      displayName: 'Run Test Suite'
-
-
-    - script: |
-        cd api
-        npm ci
-        npm install --global jest
-        echo "export NODE_OPTIONS=--experimental-vm-modules" >> $BASH_ENV
-        source $BASH_ENV
-        jest ./Tests/LoginUnitTest2.test.js --config=node_modules/jest-config-file/jest.config.js
-      displayName: 'Run Test Suite'
-
-
-    - script: |
-        cd api
-        npm ci
-        npm install --global jest
-        echo "export NODE_OPTIONS=--experimental-vm-modules" >> $BASH_ENV
-        source $BASH_ENV
-        jest ./Tests/LoginUnitTest2.test.js --config=jest.config.js
-      displayName: 'Run Test Suite'
-
-
-
-
-# - stage: BuildAndPush
-#   displayName: 'Build and Push Docker Image'
-#   dependsOn: Test
-#   jobs:
-#   - job: BuildJob
-#     displayName: 'Build and Push'
-#     steps:
-#     - task: Docker@2
-#       displayName: 'Build and Push Docker Image'
-#       inputs:
-#         command: 'buildAndPush'
-#         containerRegistry: '$(dockerRegistryServiceConnection)'
-#         repository: '$(imageName)'
-#         Dockerfile: '**/Dockerfile'
-#         tags: |
-#           $(Build.BuildId)
-#           latest
-
-# - stage: CodeCoverage
-  # displayName: 'Code Coverage'
-  # dependsOn: BuildAndPush
-  # jobs:
-  # - job: CodeCoverageJob
-  #   displayName: 'Generate Code Coverage Report'
-  #   steps:
-  #   - task: NodeTool@0
-  #     inputs:
-  #       versionSpec: '14.x'
-  #     displayName: 'Install Node.js'
-
-  #   - script: |
-  #       npm ci
-  #       npm run test -- --coverage
-  #     displayName: 'Run Jest Test Cases with Coverage'
-
-  #   - task: PublishCodeCoverageResults@1
-  #     displayName: 'Publish Code Coverage Results'
-  #     inputs:
-  #       codeCoverageTool: 'Cobertura'
-  #       summaryFileLocation: '**/coverage/cobertura-coverage.xml'
-  #       reportDirectory: '**/coverage'
