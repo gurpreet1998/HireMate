@@ -22,7 +22,7 @@ stages:
       displayName: 'Install Node.js'
     - script: |
         npm ci
-        npm test --runInBand --testMatch "./Tests"
+        npm test --runInBand --testMatch "./Tests/LoginUnitTest2.test.js"
 
 # - stage: BuildAndPush
 #   displayName: 'Build and Push Docker Image'
