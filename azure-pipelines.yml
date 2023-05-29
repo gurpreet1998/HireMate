@@ -20,9 +20,11 @@ stages:
       inputs:
         versionSpec: '14.x'
       displayName: 'Install Node.js'
+
     - script: |
         npm ci
-        npm test --runInBand --testMatch "./Tests/LoginUnitTest2.test.js"
+        jest ./Tests/LoginUnitTest2.test.js
+      displayName: 'Run Test Suite'
 
 # - stage: BuildAndPush
 #   displayName: 'Build and Push Docker Image'
