@@ -20,3 +20,12 @@ steps:
     inputs:
       testResultsFormat: "JUnit"
       testResultsFiles: '**/TEST-*.xml'
+
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'Docker Hub'
+      repository: 'gurpreets1/hirematebackend'
+      command: 'buildAndPush'
+      tags: '$(Build.BuildId)'
+      Dockerfile: '**/Dockerfile'
+    displayName: "Building and Pushing Docker Image"
