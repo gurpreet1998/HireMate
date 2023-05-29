@@ -37,6 +37,23 @@
   "jest": {
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
-    }
+    },
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "moduleNameMapper": {
+      "^.+\\.(css|scss)$": "identity-obj-proxy",
+      "^(.*)\\.js$": "$1"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx",
+      "node"
+    ],
+    "testEnvironment": "node",
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(module-to-transpile)/)"
+    ]
   }
 }
