@@ -23,8 +23,10 @@ stages:
 
     - script: |
         npm ci
+        npm install --global jest
         jest ./Tests/LoginUnitTest2.test.js
       displayName: 'Run Test Suite'
+
 
 # - stage: BuildAndPush
 #   displayName: 'Build and Push Docker Image'
