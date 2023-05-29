@@ -29,3 +29,10 @@ steps:
       tags: '$(Build.BuildId)'
       Dockerfile: '**/Dockerfile'
     displayName: "Building and Pushing Docker Image"
+  
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)'
+      artifact: 'hiremate_Artifact'
+      publishLocation: 'pipeline'
+    displayName: 'Publish Docker Image Artifact'
