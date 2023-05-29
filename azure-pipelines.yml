@@ -16,4 +16,4 @@ steps:
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: "JUnit"
-      testResultsFiles: "test-results/TEST-RESULTS.xml"
+      testResultsFiles: "../api/test-results/TEST-RESULTS.xml"
