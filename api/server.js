@@ -16,19 +16,16 @@ import SwaggerUI from "swagger-ui-express";
 const app = express();
 dotenv.config();
 mongoose.set("strictQuery", true);
-app.use(cors({ origin: "http://localhost:8080", credentials: true }));
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
-app.use(cors({ origin: "http://20.246.175.59", credentials: true }));
-app.use(cors({ origin: "http://20.127.253.108", credentials: true }));
-app.use(
-  cors({
-    origin: true, // Allow requests from any origin
-    credentials: true, // Enable credentials (cookies)
-    methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
-    credentials: true,
-    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
-  })
-);
+const corsConfig = {
+  //origin: "http://localhost:5173",
+  origin: "http://20.246.175.59",
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsConfig));
+app.options("*", cors(corsConfig));
+//app.use(cors({ origin: "http://20.246.175.59", credentials: true }));
 app.set("trust proxy", true);
 const options = {
   definition: {
@@ -39,7 +36,7 @@ const options = {
     },
     // servers: [
     //   {
-    //     url: "http://localhost:8800/",
+    //     // url: "http://localhost:8800/",
     //   },
     // ],
     components: {
@@ -255,18 +252,6 @@ const options = {
     },
   },
   apis: ["./routes/*js"],
-  explorer: true,
-  // swaggerOptions: {
-  //   plugins: [
-  //     {
-  //       cors: {
-  //         // Set CORS options
-  //         origins: ["http://localhost:8800", "http://20.127.253.108"], // Update with your Swagger UI URL
-  //         credentials: true, // Enable credentials (cookies)
-  //       },
-  //     },
-  //   ],
-  // },
 };
 
 const swaggerSpec = swaggerJSDoc(options);
