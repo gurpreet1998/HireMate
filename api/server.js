@@ -20,7 +20,14 @@ const corsConfig = {
   //origin: "http://localhost:5173",
   origin: "http://20.246.175.59",
   credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"],
+  methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
+  allowedHeaders: [
+    "Origin",
+    "X-Requested-With",
+    "Content-Type",
+    "Accept",
+    "Authorization",
+  ],
 };
 
 app.use(cors(corsConfig));
