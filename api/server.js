@@ -18,7 +18,11 @@ dotenv.config();
 mongoose.set("strictQuery", true);
 const corsConfig = {
   //origin: "http://localhost:5173",
-  origin: "http://20.246.175.59",
+  origin: [
+    "http://20.246.175.59",
+    "http://20.127.253.108",
+    "http://localhost:5173",
+  ],
   credentials: true,
   methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
   allowedHeaders: [
@@ -32,7 +36,6 @@ const corsConfig = {
 
 app.use(cors(corsConfig));
 app.options("*", cors(corsConfig));
-//app.use(cors({ origin: "http://20.246.175.59", credentials: true }));
 app.set("trust proxy", true);
 const options = {
   definition: {
