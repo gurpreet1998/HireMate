@@ -5,6 +5,7 @@ import {
   intent,
   confirm,
   updateOrderStatus,
+  getFilteredOrders,
 } from "../controllers/order.controller.js";
 
 const router = express.Router();
@@ -105,5 +106,7 @@ router.put("/", verifyToken, confirm);
  *               $ref: '#/components/schemas/Error'
  */
 router.put("/:id/status", updateOrderStatus);
+
+router.get("/getFilteredOrders", verifyToken, getFilteredOrders);
 
 export default router;

@@ -44,6 +44,24 @@ export const getOrders = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getFilteredOrders = async (req, res) => {
+  try {
+    const { gigId, buyerId } = req.query;
+
+    // Implement your logic to filter orders based on gigId and buyerId
+    const filteredOrders = await Order.find({
+      gigId: gigId,
+      buyerId: buyerId,
+    });
+
+    res.status(200).json(filteredOrders);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch orders" });
+  }
+};
+
 export const confirm = async (req, res, next) => {
   try {
     const orders = await Order.findOneAndUpdate(
